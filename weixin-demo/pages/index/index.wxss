@@ -1,0 +1,31 @@
+/**index.wxss**/
+.concainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.banners {
+  width: 800rpx;
+  height: 400rpx;
+}
+.item {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+.list{
+width: 700rpx;
+height: 100%rpx;
+}
+.list-item {
+width: 700rpx;
+height: 100%rpx;
+color: #000;
+font-size: 30rpx;
+text-align: center;
+}
+.list-item view{
+  width: 700rpx;
+  height: 100rpx;
+  font-size: 30rpx;
+}

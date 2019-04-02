@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>微信复制DEMO</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    .demo {
+      width: 475px;
+      margin: 0 auto;
+    }
+
+    .demo-btn {
+      padding: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="demo">
+    <section id="target" style="border: 0px none;">
+      <section style="width:96%;margin:0 auto;border:1px solid #42ae00;box-sizing:border-box;">
+        <section style="width:100%;">
+          <img
+            src="http://mpt.135editor.com/mmbiz_png/fgnkxfGnnkTYZ3DkBFIxXm8lsgN4NDTNictzwiasXY6eSMG9jKKBneOwXuago6AYt2oibpdODMPia2mQ5E7om4FHhQ/0?wx_fmt=png"
+            style="width:100%;vertical-align:top;">
+        </section>
+        <section style="margin-top:-30px;display:flex;justify-content:center;">
+          <section style="width:2px;background-color:#42ae00;"></section>
+          <section
+            style="background-color:rgba(66,174,0,0.9);padding-left:10px;padding-right:10px;padding-top:4px;padding-bottom:3px;margin-left:4px;margin-right:4px;">
+            <p style="font-size:16px;color:#ffffff;min-width:1px;font-weight:bold;">春的故事</p>
+          </section>
+          <section style="width:1px;background-color:#42ae00;"></section>
+        </section>
+        <section
+          style="margin-top:10px;padding-left:20px;padding-right:20px;padding-bottom:20px; font-size:14px;color:#464545;">
+          <p>立春是中国民间重要的传统节日之一。“立”是“开始”的意思，自秦代以来，中国就一直以立春作为孟春时节的开始。所谓“一年之计在于春”，春是温暖，鸟语花香；春是生长，耕耘播种。</p>
+        </section>
+      </section>
+    </section>
+    <section class="demo-btn">
+      <button id="copy-btn">复制</button>
+      <span id="message"></span>
+    </section>
+  </section>
+
+
+</body>
+<script type="text/javascript">
+  var btn = document.getElementById("copy-btn");
+  btn.onclick = function () {
+    tapCopy();
+  }
+  function tapCopy() {
+    selectText('text');
+    document.execCommand('copy');
+    alert('复制成功');
+  }
+  function selectText(element) {
+    var text = document.getElementsByClassName("demo")[0];
+    if (document.body.createTextRange) {
+      var range = document.body.createTextRange();
+      range.moveToElementText(text);
+      range.select();
+    } else if (window.getSelection) {
+      var selection = window.getSelection();
+      var range = document.createRange();
+      range.selectNodeContents(text);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    } else {
+      alert("复制失败");
+    }
+  }
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,61 @@
+/* pages/list/list.wxss */
+
+.list {
+  width: 100%;
+  height: 1000rpx;
+}
+
+.list-item {
+  /* width: 700rpx;
+  height: 100%; */
+  color: #000;
+  font-size: 30rpx;
+  text-align: left;
+}
+
+.list-item view {
+  width: 100%;
+  height: auto;
+}
+.image-article{
+  width: 100%;
+}
+.tet{
+  width: 100%;
+  height: auto;
+  margin: 10rpx;
+}
+.tj{
+  width: 100%;
+  height: 100rpx;
+  font-size: 20px;
+  color: red;
+  text-align: center;
+}
+
+.concainer {
+  width: 100%;
+  height: 100rpx;
+  position: fixed;
+  bottom: 0;
+  display:flex;
+  justify-content:space-around;
+}
+
+.back {
+  width: 50%;
+  height: 150rpx;
+  text-align: center;
+  line-height: 100rpx;
+  background:yellow;
+  display: inline-block;
+}
+
+.fx {
+  width: 50%;
+  height: 100rpx;
+  display: inline-block;
+  text-align: center;
+  line-height: 100rpx;
+  background: rgb(119, 0, 255);
+}

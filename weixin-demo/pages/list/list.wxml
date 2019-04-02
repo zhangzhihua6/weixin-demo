@@ -1,0 +1,69 @@
+<!--pages/list/list.wxml-->
+<wxs module='m1'>
+  var dateFormat = function(date) {
+    // 接受传进来的时间
+    var oldTime = parseInt(date)
+    // 取得今天时间
+    var nowTime = getDate().getTime()
+    // 取得相差的时间
+    var betweenTime = nowTime - oldTime
+    // 文章发送时间距离现在1天以上的，显示实际发送日期，如2018-03-08 15:12
+    if (betweenTime > 60 * 60 * 24 * 1000) {
+      var hour = getDate(oldTime).getHours().toString()
+      var min = getDate(oldTime).getMinutes().toString()
+      var year = getDate(oldTime).getFullYear().toString()
+      var month = (getDate(oldTime).getMonth() + 1).toString()
+      var day = getDate(oldTime).getDate().toString()
+      // 对单位数进行加0处理
+      hour = hour.length == 1 ? '0' + hour : hour
+      min = min.length == 1 ? '0' + min : min
+      day = day.length == 1 ? '0' + day : day
+      month = month.length == 1 ? '0' + month : month
+      date = year + '-' + month + '-' + day + ' ' + hour + ':' + min
+    }
+    // 距离1天以内，1小时以上的，显示小时数，如6小时前
+    else if (betweenTime > 60 * 60 * 1000) {
+      date = getDate(betweenTime).getHours()
+    }
+    // 1小时以内的，5分钟以上的显示分钟数，如34分钟前
+    else if (betweenTime > 5 * 60 * 1000) {
+      date = getDate(betweenTime).getMinutes()
+    }
+    // 5分钟以内的，显示“刚刚”
+    else {
+      date = '刚刚'
+    }
+    return date
+  }
+
+  module.exports = {
+    dateFormat: dateFormat,
+  }
+</wxs>
+<view class="list">
+  <block wx:for="{{textdata}}" wx:key="{{index}}">
+    <view class="list-item">
+      <image wx:if="{{item.url}}" src="{{item.url}}" class="image-article"></image>
+      <view class='tet'>{{item.text}}</view>
+    </view>
+  </block>
+  <view>
+    <view class='tj'>推荐列表</view>
+    <view class='more'>
+      <block wx:for="{{base}}" wx:key="{{item.id}}">
+        <view data-listId="{{item.id}}" bindtap='list'>
+          <view>标题：{{item.title}}</view>
+
+          <image src="{{item.cover}}"></image>
+
+          <view>发表时间：{{m1.dateFormat(item.time)}}</view>
+        </view>
+      </block>
+
+    </view>
+  </view>
+</view>
+<view class='concainer'>
+  <botton class='back' bindtap='btn'>返回首页</botton>
+  <button class='fx' bindtap='fxbtn' open-type='share'>分享</button>
+</view>
