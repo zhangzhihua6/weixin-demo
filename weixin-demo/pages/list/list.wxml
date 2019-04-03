@@ -64,6 +64,6 @@
   </view>
 </view>
 <view class='concainer'>
-  <botton class='back' bindtap='btn'>返回首页</botton>
+  <botton class='back' bindtap='btn'>返回</botton>
   <button class='fx' bindtap='fxbtn' open-type='share'>分享</button>
 </view>

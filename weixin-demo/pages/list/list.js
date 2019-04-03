@@ -8,7 +8,7 @@ Page({
    */
   data: {
     textdata: [],
-    str:[],
+    str: [],
     base: []
   },
 
@@ -32,31 +32,10 @@ Page({
     }).catch((error) => {
       console.log(error)
     })
-    // wx.request({
-    //   url: 'https://im.meiriv.com/test/get.php?type=GetGraphic&id=' + id,
-    //   data: {
-
-    //   },
-    //   method: 'GET',
-    //   header: { 'Content-Type': 'application/json' },
-    //   success: function (res) {
-    //     that.setData({
-    //       textdata: JSON.parse(res.data.content)
-    //     });
-    //     console.log(JSON.parse(res.data.content));
-    //   },
-    //   fail: function () {
-    //     // fail
-    //   },
-    //   complete: function () {
-
-    //   }
-    // })
-
   },
   // 返回按钮的点击
   btn: function() {
-    wx.navigateTo({
+    wx.navigateBack({
       url: '../index/index',
     })
   },
@@ -65,29 +44,36 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    var that = this;
-    wx.request({
-      url: 'https://im.meiriv.com/test/get.php?type=GetAll&page=' + page + '&count=10',
-      data: {
+    var _this = this;
+    httpService.getHomeBean(page).then((result) => {
 
-      },
-      method: 'GET',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function(res) {
-        that.setData({
-          base: res.data
-        });
-        // console.log(res.data);
-      },
-      fail: function() {
-        // fail
-      },
-      complete: function() {
+      _this.setData({
+        base: result.data
 
-      }
+      })
+    }).catch((error) => {
+      console.log(error)
     })
+    // wx.request({
+    //   url: 'https://im.meiriv.com/test/get.php?type=GetAll&page=' + page + '&count=10',
+    //   data: {},
+    //   method: 'GET',
+    //   header: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   success: function(res) {
+    //     that.setData({
+    //       base: res.data
+    //     });
+    //     // console.log(res.data);
+    //   },
+    //   fail: function() {
+    //     // fail
+    //   },
+    //   complete: function() {
+
+    //   }
+    // })
   },
   list: function(e) {
     let listid = e.currentTarget.dataset.listid;
@@ -127,7 +113,22 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
+    var _this = this;
+    // 显示加载图标
+    wx.showLoading({
+      title: '玩命加载中',
+    })
+    page = page + 1;
+    httpService.getHomeBean(page).then((result) => {
 
+      _this.setData({
+        base: result.data
+
+      })
+      wx.hideLoading();
+    }).catch((error) => {
+      console.log(error)
+    })
   },
 
   /**

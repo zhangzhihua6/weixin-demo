@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 var time = require('../../utils/util.js');
+let httpService = require("../../utils/service.js");
 const app = getApp()
 let page = 1
 
@@ -15,7 +16,7 @@ Page({
     images: {},
     textdata: [],
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
     var array = this.data.arr
     for (let i = 1; i < 3; i++) {
       array.push("../images/" + "banner" + i + ".png")
@@ -25,7 +26,7 @@ Page({
     })
 
   },
-  imageLoad: function (e) {
+  imageLoad: function(e) {
     var $width = e.detail.width,
       $height = e.detail.height,
       ratio = $width / $height;
@@ -41,60 +42,79 @@ Page({
       images: image
     })
   },
-  onReady: function () {
-      var that = this;
-      wx.request({
-        url: 'https://im.meiriv.com/test/get.php?type=GetAll&page='+page+'&count=10',
-        data: {
+  onReady: function() {
+    var _this = this;
+    httpService.getHomeBean(page).then((result) => {
 
-        },
-        method: 'GET',
-        header: { 'Content-Type': 'application/json' },
-        success: function (res) {
-          that.setData({
-            textdata: res.data
-          });
-          // console.log(res.data);
-        },
-        fail: function () {
-          // fail
-        },
-        complete: function () {
-          
-        }
+      _this.setData({
+        textdata: result.data
+
       })
+    }).catch((error) => {
+      console.log(error)
+    })
+    // wx.request({
+    //   url: 'https://im.meiriv.com/test/get.php?type=GetAll&page='+page+'&count=10',
+    //   data: {
+
+    //   },
+    //   method: 'GET',
+    //   header: { 'Content-Type': 'application/json' },
+    //   success: function (res) {
+    //     that.setData({
+    //       textdata: res.data
+    //     });
+    //     // console.log(res.data);
+    //   },
+    //   fail: function () {
+    //     // fail
+    //   },
+    //   complete: function () {
+
+    //   }
+    // })
   },
-  list:function(e){
+  list: function(e) {
     let listid = e.currentTarget.dataset.listid;
     wx.navigateTo({
-      url: '../list/list?listid='+listid,
+      url: '../list/list?listid=' + listid,
     })
   },
- 
-  onReachBottom: function () {
-    var that = this;
+
+  onReachBottom: function() {
+    var _this = this;
     // 显示加载图标
     wx.showLoading({
       title: '玩命加载中',
     })
-    page = page +1;
-     wx.request({
-      url: 'https://im.meiriv.com/test/get.php?type=GetAll&page='+page+'&count=10',
-      data:{
-       
-      },
-      method: "GET",
-      // 请求头部
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (res) {
-        that.setData({
-          textdata: res.data
-        });
-        console.log(res.data);
-        wx.hideLoading();
-      }
+    page = page + 1;
+    httpService.getHomeBean(page).then((result) => {
+
+      _this.setData({
+        textdata: result.data
+
+      })
+      wx.hideLoading();
+    }).catch((error) => {
+      console.log(error)
     })
+    // wx.request({
+    //   url: 'https://im.meiriv.com/test/get.php?type=GetAll&page=' + page + '&count=10',
+    //   data: {
+
+    //   },
+    //   method: "GET",
+    //   // 请求头部
+    //   header: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   success: function(res) {
+    //     that.setData({
+    //       textdata: res.data
+    //     });
+    //     console.log(res.data);
+    //     wx.hideLoading();
+    //   }
+    // })
   }
 })

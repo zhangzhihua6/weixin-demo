@@ -28,4 +28,5 @@ text-align: center;
   width: 700rpx;
   height: 100rpx;
   font-size: 30rpx;
+  text-align: left;
 }
