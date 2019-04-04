@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,35 +8,55 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/index.css">
-    
+
 </head>
+
 <body>
     <div id="main">
         <div class="main con">
             <div class="left fl">
                 <div class="jim">
                     <p>尬聊Jim</p>
-                    <textarea rows="10" cols="20" value="" class="txt fl"></textarea>
+                    <textarea rows="10" cols="20" value="" class="txt1 fl"></textarea>
                     <button class="wb fr">文本</button>
                     <button class="tp fr">图片</button>
+                    <input class="fs1" type="button" value="发送">
                 </div>
                 <div class="liz">
                     <p>爆炒Liz</p>
-                    <textarea rows="10" cols="20" value="" class="txt fl"></textarea>
+                    <textarea rows="10" cols="20" value="" class="txt2 fl"></textarea>
                     <button class="wb fr">文本</button>
                     <button class="tp fr">图片</button>
+                    <input class="fs2" type="button" value="发送">
                 </div>
             </div>
             <div class="right fr">
-                <div class="chat"></div>
-
-
-
+                <div class="chat" onKeypress="keypress()" onKeyup="keyup();">
+                    <ul data="左气泡" class="zchat">
+                        <!-- <section class="zk">
+                            <section class="zktxt1">尬聊Jim</section>
+                            <section class="zktxt2">
+                                <section class="zktxt3">
+                                    <p>你好</p>
+                                </section>
+                            </section>
+                        </section> -->
+                    </ul>
+                    <ul data="右气泡" class="ychat">
+                        <!-- <section class="yk">
+                            <section class="yktxt1">爆炒Liz</section>
+                            <section class="yktxt2">
+                                <section class="yktxt3">
+                                    <p>Hello</p>
+                                </section>
+                            </section>
+                        </section> -->
+                    </ul>
+                </div>
             </div>
-
-
         </div>
     </div>
 </body>
 <script src="js/index.js"></script>
+
 </html>
